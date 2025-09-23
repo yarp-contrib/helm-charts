@@ -25,7 +25,8 @@ spec:
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+        - name: ghcr-secret
+        # {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "yarp-k8s-ingress-controller.serviceAccountName" . }}
       {{- with .Values.podSecurityContext }}
