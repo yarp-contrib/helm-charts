@@ -8,4 +8,4 @@ roleRef:
   name: yarp-ingress-clusterrole
 subjects:
 - kind: ServiceAccount
-  name: yarp-serviceaccount
+  name: {{ include "yarp-k8s-ingress-controller.serviceAccountName" . }}
