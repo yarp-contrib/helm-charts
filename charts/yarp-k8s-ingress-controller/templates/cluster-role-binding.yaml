@@ -9,3 +9,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: {{ include "yarp-k8s-ingress-controller.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
