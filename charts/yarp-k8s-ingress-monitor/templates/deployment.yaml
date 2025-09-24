@@ -48,7 +48,7 @@ spec:
             - name: YARP__CONTROLLERCLASS
               value: "microsoft.com/ingress-yarp"
             - name: YARP__CONTROLLERSERVICENAME
-              value: {{ include "yarp-k8s-ingress-controller.fullname" . }}
+              value: "yarp-ingress-controller"
             - name: YARP__CONTROLLERSERVICENAMESPACE
               valueFrom:
                 fieldRef:
