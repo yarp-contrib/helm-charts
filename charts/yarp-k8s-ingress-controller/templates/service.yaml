@@ -4,6 +4,10 @@ metadata:
   name: {{ include "yarp-k8s-ingress-controller.fullname" . }}
   labels:
     {{- include "yarp-k8s-ingress-controller.labels" . | nindent 4 }}
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 spec:
   type: LoadBalancer
   ports:
