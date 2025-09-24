@@ -1,4 +1,4 @@
-# Default values for yarp-k8s-ingress-controller.
+# Default values for yarp-k8s-ingress-monitor.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,15 +7,14 @@ replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: ghcr.io/yarp-contrib/k8s-ingress-controller
+  repository: ghcr.io/yarp-contrib/k8s-ingress-monitor
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "09ac4ad51d10acd43c8ff01618f6690be4c54a68"
+  tag: ""
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-imagePullSecrets:
-  - name: ghcr-secret
+imagePullSecrets: []
 # This is to override the chart name.
 nameOverride: ""
 fullnameOverride: ""
@@ -89,12 +88,12 @@ resources: {}
 # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
   httpGet:
-    path: /health/live
-    port: 8000
+    path: /
+    port: http
 readinessProbe:
   httpGet:
-    path: /health/ready
-    port: 8000
+    path: /
+    port: http
 
 # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
@@ -117,8 +116,7 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector:
-  eks.amazonaws.com/compute-type: auto
+nodeSelector: {}
 
 tolerations: []
 

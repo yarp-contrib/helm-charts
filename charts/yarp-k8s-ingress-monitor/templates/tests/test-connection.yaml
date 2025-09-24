@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "yarp-k8s-ingress-monitor.fullname" . }}-test-connection"
+  labels:
+    {{- include "yarp-k8s-ingress-monitor.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "yarp-k8s-ingress-monitor.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
