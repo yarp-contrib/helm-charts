@@ -44,6 +44,15 @@ spec:
             - containerPort: 8000
               name: api
               protocol: TCP
+          env:
+            - name: YARP__CONTROLLERCLASS
+              value: "microsoft.com/ingress-yarp"
+            - name: YARP__CONTROLLERSERVICENAME
+              value: {{ include "yarp-k8s-ingress-controller.fullname" . }}
+            - name: YARP__CONTROLLERSERVICENAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
