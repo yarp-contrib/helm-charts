@@ -9,9 +9,9 @@ replicaCount: 1
 image:
   repository: ghcr.io/yarp-contrib/k8s-ingress-controller
   # This sets the pull policy for images.
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "8fc729d40d95d719d4ad5b61cd99b02f30481e4d"
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets:
