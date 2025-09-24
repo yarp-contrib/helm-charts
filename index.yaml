@@ -114,6 +114,16 @@ entries:
   yarp-k8s-ingress-monitor:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-09-24T23:28:28.040981554Z"
+    description: YARP Kubernetes Ingress Monitor
+    digest: 48b735bf77e31a437c7dd5d587dd23438e39aa791fdab9bf68f6de4161020657
+    name: yarp-k8s-ingress-monitor
+    type: application
+    urls:
+    - https://github.com/yarp-contrib/helm-charts/releases/download/yarp-k8s-ingress-monitor-0.1.2/yarp-k8s-ingress-monitor-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-09-24T23:25:10.974916349Z"
     description: A Helm chart for Kubernetes
     digest: 62c8bec0bbeec29fe8a131a0ca56ffb429f1d58114a6232cc39be7c7ebff2d1c
@@ -122,4 +132,4 @@ entries:
     urls:
     - https://github.com/yarp-contrib/helm-charts/releases/download/yarp-k8s-ingress-monitor-0.1.0/yarp-k8s-ingress-monitor-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-24T23:25:10.974970199Z"
+generated: "2025-09-24T23:28:28.041008765Z"
