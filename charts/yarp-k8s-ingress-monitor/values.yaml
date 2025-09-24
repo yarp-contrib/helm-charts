@@ -14,7 +14,8 @@ image:
   tag: "39de3ce5191a2dd216dccaf095bb934b4a50ce1c"
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-imagePullSecrets: []
+imagePullSecrets:
+  - name: ghcr-secret
 # This is to override the chart name.
 nameOverride: ""
 fullnameOverride: ""
