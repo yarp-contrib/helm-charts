@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  yarp-ingress:
+  - apiVersion: v2
+    appVersion: 72ca7cdafef6af71382cba8cfe5e02ad52b5a41a
+    created: "2025-10-03T21:28:26.598214681Z"
+    description: YARP Ingress Controller for Kubernetes
+    digest: 219284c15db28f91fab56f0a16b637ad6038dd98ff4dce293d88582448f1b0a1
+    name: yarp-ingress
+    type: application
+    urls:
+    - https://github.com/yarp-contrib/helm-charts/releases/download/yarp-ingress-0.1.0/yarp-ingress-0.1.0.tgz
+    version: 0.1.0
   yarp-k8s-ingress-controller:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -162,4 +173,4 @@ entries:
     urls:
     - https://github.com/yarp-contrib/helm-charts/releases/download/yarp-k8s-ingress-monitor-0.1.0/yarp-k8s-ingress-monitor-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-24T23:53:42.904498833Z"
+generated: "2025-10-03T21:28:26.598585566Z"
