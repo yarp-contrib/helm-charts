@@ -1,0 +1,7 @@
+apiVersion: v2
+name: yarp-ingress
+description: YARP Ingress Controller for Kubernetes
+
+type: application
+version: 0.1.0
+appVersion: "72ca7cdafef6af71382cba8cfe5e02ad52b5a41a"

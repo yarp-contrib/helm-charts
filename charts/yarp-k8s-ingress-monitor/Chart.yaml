@@ -1,7 +1,0 @@
-apiVersion: v2
-name: yarp-k8s-ingress-monitor
-description: YARP Kubernetes Ingress Monitor
-
-type: application
-version: 0.1.6
-appVersion: "1.16.0"
