@@ -105,5 +105,4 @@ spec:
   {{- end }}
   selector:
     {{- include "yarp-ingress.selectorLabels" . | nindent 4 }}
-    app.kubernetes.io/component: controller
 {{- end }}
