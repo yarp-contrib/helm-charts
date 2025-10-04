@@ -8,6 +8,7 @@ metadata:
   {{- end }}
   labels:
     {{- include "yarp-ingress.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
   name: {{ include "yarp-ingress.fullname" . }}-monitor
   namespace: {{ .Release.Namespace }}
 spec:
@@ -19,4 +20,5 @@ spec:
       targetPort: 8000
   selector:
     {{- include "yarp-ingress.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
 {{- end }}

@@ -8,6 +8,7 @@ metadata:
   {{- end }}
   labels:
     {{- include "yarp-ingress.labels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
   name: {{ include "yarp-ingress.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
@@ -105,4 +106,5 @@ spec:
   {{- end }}
   selector:
     {{- include "yarp-ingress.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
 {{- end }}

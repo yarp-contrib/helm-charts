@@ -5,6 +5,7 @@ metadata:
   name: {{ include "yarp-ingress.fullname" . }}-monitor
   labels:
     {{- include "yarp-ingress.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
 spec:
   {{- if not .Values.monitor.autoscaling.enabled }}
   replicas: {{ .Values.monitor.replicaCount }}
@@ -12,6 +13,7 @@ spec:
   selector:
     matchLabels:
       {{- include "yarp-ingress.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: monitor
   template:
     metadata:
       {{- with .Values.monitor.podAnnotations }}
@@ -20,6 +22,7 @@ spec:
       {{- end }}
       labels:
         {{- include "yarp-ingress.labels" . | nindent 8 }}
+        app.kubernetes.io/component: monitor
         {{- with .Values.monitor.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
