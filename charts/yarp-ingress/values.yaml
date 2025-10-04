@@ -43,6 +43,10 @@ controller:
     http: 8000
     https: 8443
 
+  defaultSslCertificate:
+    enabled: false
+    secret: yarp/yarp-ingress-tls
+
   resources:
     ##  limits:
     ##    cpu: 100m

@@ -48,7 +48,7 @@ spec:
           {{- end }}
           env:
             - name: ASPNETCORE_URLS
-              value: http://*:8000;https://*:8443
+              value: http://*:{{ .Values.controller.containerPorts.http }};https://*:{{ .Values.controller.containerPorts.https }}
             - name: YARP__CONTROLLERCLASS
               value: {{ .Values.controller.ingressClassResource.controllerValue | quote }}
             - name: YARP__CONTROLLERSERVICENAME
@@ -57,6 +57,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: YARP__SERVERCERTIFICATE
+              value: {{ ternary "true" "false" .Values.controller.defaultSslCertificate.enabled | quote }}
+            - name: YARP__DEFAULTSSLCERTIFICATE
+              value: {{ .Values.controller.defaultSslCertificate.secret | quote }}
             {{- if .Values.monitor.enabled }}
             - name: YARP__CONTROLLERURL
               value: {{ printf "http://%s-monitor.%s.svc.cluster.local:8000" (include "yarp-ingress.fullname" .) .Release.Namespace | quote }}
