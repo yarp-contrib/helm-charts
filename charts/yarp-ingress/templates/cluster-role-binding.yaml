@@ -11,4 +11,9 @@ subjects:
 - kind: ServiceAccount
   name: {{ include "yarp-ingress.controller.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
+{{- if .Values.monitor.enabled }}
+- kind: ServiceAccount
+  name: {{ include "yarp-ingress.monitor.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+{{- end }}
 {{- end }}

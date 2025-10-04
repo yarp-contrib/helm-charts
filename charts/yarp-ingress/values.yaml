@@ -184,3 +184,90 @@ controller:
 
 rbac:
   create: true
+
+monitor:
+  enabled: false
+
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/yarp-contrib/kubernetes-ingress/monitor
+    pullPolicy: IfNotPresent
+    tag: ""
+
+  imagePullSecrets:
+    - name: ghcr-secret
+
+  serviceAccount:
+    create: true
+    automount: true
+    annotations: {}
+    name: ""
+
+  podAnnotations: {}
+  podLabels: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  containerSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+    runAsGroup: 101
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+
+  containerPorts:
+    http: 8000
+    https: 8443
+
+  resources:
+    ##  limits:
+    ##    cpu: 100m
+    ##    memory: 90Mi
+    requests:
+      cpu: 100m
+      memory: 90Mi
+
+  livenessProbe:
+    httpGet:
+      path: /health/live
+      port: 8000
+      scheme: HTTP
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    httpGet:
+      path: /health/ready
+      port: 8000
+      scheme: HTTP
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+
+  service:
+  
+    annotations: {}

@@ -60,3 +60,11 @@ Create the name of the service account to use
 {{- default "default" .Values.controller.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "yarp-ingress.monitor.serviceAccountName" -}}
+{{- if .Values.monitor.serviceAccount.create }}
+{{- default (print (include "yarp-ingress.fullname" .) "-monitor") .Values.monitor.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.monitor.serviceAccount.name }}
+{{- end }}
+{{- end }}

@@ -1,54 +1,55 @@
+{{- if .Values.monitor.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "yarp-ingress.fullname" . }}
+  name: {{ include "yarp-ingress.fullname" . }}-monitor
   labels:
     {{- include "yarp-ingress.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.controller.autoscaling.enabled }}
-  replicas: {{ .Values.controller.replicaCount }}
+  {{- if not .Values.monitor.autoscaling.enabled }}
+  replicas: {{ .Values.monitor.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "yarp-ingress.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.controller.podAnnotations }}
+      {{- with .Values.monitor.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "yarp-ingress.labels" . | nindent 8 }}
-        {{- with .Values.controller.podLabels }}
+        {{- with .Values.monitor.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.controller.imagePullSecrets }}
+      {{- with .Values.monitor.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "yarp-ingress.controller.serviceAccountName" . }}
-      {{- with .Values.controller.podSecurityContext }}
+      serviceAccountName: {{ include "yarp-ingress.monitor.serviceAccountName" . }}
+      {{- with .Values.monitor.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- with .Values.controller.containerSecurityContext }}
+          {{- with .Values.monitor.containerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
+          image: "{{ .Values.monitor.image.repository }}:{{ .Values.monitor.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.monitor.image.pullPolicy }}
           ports:
-          {{- range $key, $value := .Values.controller.containerPorts }}
+          {{- range $key, $value := .Values.monitor.containerPorts }}
             - name: {{ $key }}
               containerPort: {{ $value }}
               protocol: TCP
           {{- end }}
           env:
             - name: ASPNETCORE_URLS
-              value: http://*:8000;https://*:8443
+              value: http://*:8000
             - name: YARP__CONTROLLERCLASS
               value: {{ .Values.controller.ingressClassResource.controllerValue | quote }}
             - name: YARP__CONTROLLERSERVICENAME
@@ -57,31 +58,28 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            {{- if .Values.monitor.enabled }}
-            - name: YARP__CONTROLLERURL
-              value: {{ printf "http://%s-monitor.%s.svc.cluster.local:8000" (include "yarp-ingress.fullname" .) .Release.Namespace | quote }}
-            {{- end }}
-          {{- with .Values.controller.livenessProbe }}
+          {{- with .Values.monitor.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.controller.readinessProbe }}
+          {{- with .Values.monitor.readinessProbe }}
           readinessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.controller.resources }}
+          {{- with .Values.monitor.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- with .Values.controller.nodeSelector }}
+      {{- with .Values.monitor.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.controller.affinity }}
+      {{- with .Values.monitor.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.controller.tolerations }}
+      {{- with .Values.monitor.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}
