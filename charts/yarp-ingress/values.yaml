@@ -76,6 +76,11 @@ controller:
     successThreshold: 1
     failureThreshold: 3
 
+  pdb:
+    minAvailable: 1
+    # maxUnavailable: 1
+    unhealthyPodEvictionPolicy: ""
+
   autoscaling:
     enabled: false
     minReplicas: 1
@@ -264,6 +269,11 @@ monitor:
   tolerations: []
 
   affinity: {}
+
+  pdb:
+    minAvailable: 1
+    # maxUnavailable: 1
+    unhealthyPodEvictionPolicy: ""
 
   autoscaling:
     enabled: false
