@@ -10,8 +10,7 @@ controller:
     pullPolicy: IfNotPresent
     tag: ""
 
-  imagePullSecrets:
-    - name: ghcr-secret
+  imagePullSecrets: []
 
   serviceAccount:
     create: true
@@ -204,8 +203,7 @@ monitor:
     pullPolicy: IfNotPresent
     tag: ""
 
-  imagePullSecrets:
-    - name: ghcr-secret
+  imagePullSecrets: []
 
   serviceAccount:
     create: true
