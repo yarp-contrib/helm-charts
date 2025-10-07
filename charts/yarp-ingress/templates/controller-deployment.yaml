@@ -50,11 +50,6 @@ spec:
               protocol: TCP
           {{- end }}
           args: {{ include "yarp-ingress.controller.args" . | nindent 12 }}
-          env:
-            - name: YARP__SERVERCERTIFICATE
-              value: {{ ternary "true" "false" .Values.controller.defaultSslCertificate.enabled | quote }}
-            - name: YARP__DEFAULTSSLCERTIFICATE
-              value: {{ .Values.controller.defaultSslCertificate.secret | quote }}
           {{- with .Values.controller.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
