@@ -1,6 +1,6 @@
 {{- define "yarp-ingress.controller.args" -}}
 - --environment=Production
-- --urls=http://*:{{ .Values.controller.containerPorts.http }};https://*:{{ .Values.controller.containerPorts.https }}
+- --urls=http://*:{{ .Values.controller.containerPorts.http }}
 - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
 - --controller-service-name={{ include "yarp-ingress.fullname" . }}
 - --controller-service-namespace={{ .Release.Namespace }}
