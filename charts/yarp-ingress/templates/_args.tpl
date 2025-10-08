@@ -10,3 +10,11 @@
 - --server-certificate-enabled={{ ternary "true" "false" .Values.controller.defaultSslCertificate.enabled }}
 - --default-ssl-certificate-secret-name={{ .Values.controller.defaultSslCertificate.secret }}
 {{- end -}}
+
+{{- define "yarp-ingress.monitor.args" -}}
+- --environment=Production
+- --urls=http://*:{{ .Values.monitor.containerPorts.http }}
+- --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
+- --controller-service-name={{ include "yarp-ingress.fullname" . }}
+- --controller-service-namespace={{ .Release.Namespace }}
+{{- end -}}

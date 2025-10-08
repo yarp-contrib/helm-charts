@@ -50,17 +50,7 @@ spec:
               containerPort: {{ $value }}
               protocol: TCP
           {{- end }}
-          env:
-            - name: ASPNETCORE_URLS
-              value: http://*:8000
-            - name: YARP__CONTROLLERCLASS
-              value: {{ .Values.controller.ingressClassResource.controllerValue | quote }}
-            - name: YARP__CONTROLLERSERVICENAME
-              value: {{ include "yarp-ingress.fullname" . }}
-            - name: YARP__CONTROLLERSERVICENAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
+          args: {{ include "yarp-ingress.monitor.args" . | nindent 12 }}
           {{- with .Values.monitor.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
