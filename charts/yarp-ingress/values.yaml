@@ -93,16 +93,6 @@ controller:
 
   affinity: {}
 
-  ingressClassResource:
-    enabled: true
-    name: "yarp"
-    controllerValue: "microsoft.com/ingress-yarp"
-    default: false
-    annotations: {}
-    parameters: {}
-    # -- List of additional IngressClass resources to be created as aliases to the main IngressClass defined above.
-    aliases: []
-
   service:
     enabled: true
     # -- Annotations to be added to the external controller service.
@@ -189,6 +179,15 @@ controller:
       # udp:
       #   53: 30053
       udp: {}
+
+ingressClass:
+  name: "yarp"
+  controllerValue: "microsoft.com/ingress-yarp"
+  default: false
+  annotations: {}
+  parameters: {}
+  # -- List of additional IngressClass resources to be created as aliases to the main IngressClass defined above.
+  aliases: []
 
 rbac:
   create: true

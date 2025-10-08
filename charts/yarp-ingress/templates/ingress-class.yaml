@@ -1,22 +1,20 @@
-{{- if .Values.controller.ingressClassResource.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
 metadata:
   labels:
     {{- include "yarp-ingress.labels" . | nindent 4 }}
-  name: {{ .Values.controller.ingressClassResource.name }}
-  {{- if or .Values.controller.ingressClassResource.default .Values.controller.ingressClassResource.annotations }}
+  name: {{ .Values.ingressClass.name }}
+  {{- if or .Values.ingressClass.default .Values.ingressClass.annotations }}
   annotations:
-    {{- if .Values.controller.ingressClassResource.default }}
+    {{- if .Values.ingressClass.default }}
     ingressclass.kubernetes.io/is-default-class: "true"
     {{- end }}
-    {{- if .Values.controller.ingressClassResource.annotations }}
-    {{- toYaml .Values.controller.ingressClassResource.annotations | nindent 4 }}
+    {{- if .Values.ingressClass.annotations }}
+    {{- toYaml .Values.ingressClass.annotations | nindent 4 }}
     {{- end }}
   {{- end }}
 spec:
-  controller: {{ .Values.controller.ingressClassResource.controllerValue }}
-  {{- with .Values.controller.ingressClassResource.parameters }}
+  controller: {{ .Values.ingressClass.controllerValue }}
+  {{- with .Values.ingressClass.parameters }}
   parameters: {{ toYaml . | nindent 4 }}
   {{- end }}
-{{- end }}
