@@ -42,9 +42,7 @@ controller:
     http: 8000
     https: 8443
 
-  defaultSslCertificate:
-    enabled: false
-    secret: yarp/yarp-ingress-tls
+  extraEnvVars: []
 
   resources:
     ##  limits:
@@ -230,7 +228,8 @@ monitor:
 
   containerPorts:
     http: 8000
-    https: 8443
+
+  extraEnvVars: []
 
   resources:
     ##  limits:

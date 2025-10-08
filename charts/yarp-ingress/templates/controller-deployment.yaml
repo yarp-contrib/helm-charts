@@ -50,6 +50,10 @@ spec:
               protocol: TCP
           {{- end }}
           args: {{ include "yarp-ingress.controller.args" . | nindent 12 }}
+          env:
+          {{- if .Values.controller.extraEnvVars }}
+            {{- toYaml .Values.controller.extraEnvVars | nindent 12 }}
+          {{- end }}
           {{- with .Values.controller.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
