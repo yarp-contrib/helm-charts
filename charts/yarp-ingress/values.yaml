@@ -55,7 +55,7 @@ controller:
   livenessProbe:
     httpGet:
       path: /health/live
-      port: 10255
+      port: 10264
       scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10
@@ -65,7 +65,7 @@ controller:
   readinessProbe:
     httpGet:
       path: /health/ready
-      port: 10255
+      port: 10264
       scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10
@@ -242,7 +242,7 @@ monitor:
   livenessProbe:
     httpGet:
       path: /health/live
-      port: 10255
+      port: 10264
       scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10
@@ -252,7 +252,7 @@ monitor:
   readinessProbe:
     httpGet:
       path: /health/ready
-      port: 10255
+      port: 10264
       scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10

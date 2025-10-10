@@ -1,6 +1,6 @@
 {{- define "yarp-ingress.controller.args" -}}
 - --environment=Production
-- --urls=http://*:{{ .Values.controller.containerPorts.http }};http://*:{{ .Values.controller.containerPorts.https }};http://*:10255
+- --urls=http://*:{{ .Values.controller.containerPorts.http }};http://*:{{ .Values.controller.containerPorts.https }};http://*:10264
 - --controller-class={{ .Values.ingressClass.controllerValue }}
 - --controller-service-name={{ include "yarp-ingress.fullname" . }}
 - --controller-service-namespace={{ .Release.Namespace }}
@@ -11,7 +11,7 @@
 
 {{- define "yarp-ingress.monitor.args" -}}
 - --environment=Production
-- --urls=http://*:{{ .Values.monitor.containerPorts.http }};http://*:10255
+- --urls=http://*:{{ .Values.monitor.containerPorts.http }};http://*:10264
 - --controller-class={{ .Values.ingressClass.controllerValue }}
 - --controller-service-name={{ include "yarp-ingress.fullname" . }}
 - --controller-service-namespace={{ .Release.Namespace }}
